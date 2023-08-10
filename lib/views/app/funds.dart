@@ -12,9 +12,14 @@ class Funds extends StatefulWidget {
 class _FundsState extends State<Funds> {
   @override
   Widget build(BuildContext context) {
-    return BaseApp.puraBgApp(
-      body: const Center(
-        child: Text("Funds"),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: BaseApp.puraBgApp(
+        body: const Center(
+          child: Text("Funds"),
+        ),
       ),
     );
   }

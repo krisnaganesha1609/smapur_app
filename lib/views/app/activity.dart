@@ -11,9 +11,14 @@ class Activity extends StatefulWidget {
 class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
-    return BaseApp.puraBgApp(
-      body: const Center(
-        child: Text("Activity"),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: BaseApp.puraBgApp(
+        body: const Center(
+          child: Text("Activity"),
+        ),
       ),
     );
   }
