@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:smapur/res/assets.dart';
 import 'package:smapur/shared/base.dart';
 import 'package:smapur/shared/const.dart';
+import 'package:smapur/views/app/features/settings/pages/detailedprofile.dart';
+import 'package:smapur/views/app/features/settings/pages/generalprofile.dart';
+import 'package:smapur/views/app/features/settings/pages/passwordandsecurity.dart';
 
 class MainProfile extends StatefulWidget {
   const MainProfile({super.key});
@@ -16,55 +20,82 @@ class _MainProfileState extends State<MainProfile> {
     return BaseApp.puraBgApp(
         appBar: AppBar(
           toolbarHeight: MediaQuery.of(context).size.height * 0.135,
-          leading: IconButton(
-              onPressed: () {}, icon: const Icon(Icons.arrow_back_ios)),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                )),
+          ),
           backgroundColor: Colors.white,
           elevation: 5,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05),
-            child: Text(
-              "Your Settings!",
-              style: ConstantsValue.primarySubheading,
-            ),
+          centerTitle: true,
+          title: Text(
+            "Main Profile",
+            style: ConstantsValue.primarySubheading,
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            _buildMainProfile(
-                photo: ImageAssets.dummyProfile,
-                name: "Mang Sed Alan Jayana",
-                citizenship: "Tempek Sulaiman"),
-            const SizedBox(
-              height: 20,
-            ),
-            _buildMenuProfile(
-                color: Colors.green.shade400,
-                settingsName: "General Profile",
-                settingsDesc: "Fullname, Username, Profile Photo",
-                onIconBtnPressed: () {}),
-            const SizedBox(
-              height: 20,
-            ),
-            _buildMenuProfile(
-                color: Colors.green.shade600,
-                settingsName: "Detailed Profile",
-                settingsDesc: "Date of Birth, Phone Number, Address",
-                onIconBtnPressed: () {}),
-            const SizedBox(
-              height: 20,
-            ),
-            _buildMenuProfile(
-                color: Colors.green.shade800,
-                settingsName: "Password & Security",
-                settingsDesc: "Change Password, Last Login Attempt",
-                onIconBtnPressed: () {})
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              _buildMainProfile(
+                  photo: ImageAssets.dummyProfile,
+                  name: "Mang Sed Alan Jayana",
+                  citizenship: "Tempek Sulaiman"),
+              const SizedBox(
+                height: 60,
+              ),
+              _buildMenuProfile(
+                  color: Colors.green.shade300,
+                  settingsName: "General Profile",
+                  settingsDesc: "Fullname, Username, Profile Photo",
+                  onIconBtnPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const GeneralProfile(),
+                            type: PageTransitionType.rightToLeft));
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              _buildMenuProfile(
+                  color: Colors.green.shade500,
+                  settingsName: "Detailed Profile",
+                  settingsDesc: "Date of Birth, Phone Number, Address",
+                  onIconBtnPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const DetailedProfile(),
+                            type: PageTransitionType.rightToLeft));
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              _buildMenuProfile(
+                  color: Colors.green.shade800,
+                  settingsName: "Password & Security",
+                  settingsDesc: "Change Password, Last Login Attempt",
+                  onIconBtnPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const PasswordAndSecurity(),
+                            type: PageTransitionType.rightToLeft));
+                  })
+            ],
+          ),
         ));
   }
 
@@ -73,12 +104,14 @@ class _MainProfileState extends State<MainProfile> {
           required String name,
           required String citizenship}) =>
       InkWell(
+        splashColor: Colors.amber,
+        borderRadius: BorderRadius.circular(20),
         onTap: () {},
         child: Column(
           children: [
             Material(
               color: Colors.transparent,
-              elevation: 10,
+              elevation: 50,
               child: ClipOval(
                 child: Image.asset(
                   photo,
@@ -88,14 +121,14 @@ class _MainProfileState extends State<MainProfile> {
               ),
             ),
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
             Text(
               name,
               style: ConstantsValue.primaryParagraph,
             ),
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
             Text(
               "Citizen of $citizenship",

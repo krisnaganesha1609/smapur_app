@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:smapur/res/assets.dart';
 
 class BaseApp {
-  static Widget puraBgApp(
-      {final PreferredSizeWidget? appBar,
-      required Widget body,
-      final Widget? bottomNavigationBar}) {
+  static Widget puraBgApp({
+    final PreferredSizeWidget? appBar,
+    required Widget body,
+    final Widget? floatingActionButton,
+    final FloatingActionButtonLocation? floatingActionButtonLocation,
+  }) {
     return SafeArea(
       child: Container(
         decoration: const BoxDecoration(
@@ -21,7 +23,8 @@ class BaseApp {
           body: Container(
             child: body,
           ),
-          bottomNavigationBar: bottomNavigationBar,
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
         ),
       ),
     );

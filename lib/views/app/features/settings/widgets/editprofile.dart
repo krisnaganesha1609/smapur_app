@@ -24,22 +24,31 @@ class EditProfileWidgets extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: const Icon(Icons.arrow_back_ios)),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              )),
           backgroundColor: Colors.white,
           elevation: 5,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05),
-            child: Text(
-              pageName,
-              style: ConstantsValue.primarySubheading,
-            ),
+          centerTitle: true,
+          title: Text(
+            pageName,
+            style: ConstantsValue.primarySubheading,
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(children: [
-            content,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: content,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
             Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
                   color: ConstantsValue.primaryBgColor,
                   border: Border.all(width: 1.5),
@@ -65,23 +74,28 @@ class EditProfileWidgets extends StatelessWidget {
                   const Spacer(),
                 ],
               ),
-            )
-          ]),
-        ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          child: OutlinedButton(
-              onPressed: save,
-              style: OutlinedButton.styleFrom(
-                  backgroundColor: ConstantsValue.primaryBtnColor,
-                  elevation: 5,
-                  side: const BorderSide()),
-              child: Center(
-                child: Text(
-                  "Save Changes",
-                  style: ConstantsValue.primaryInlineText,
-                ),
-              )),
+            ),
+            const Divider(
+              thickness: 2,
+              color: Colors.black,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: OutlinedButton(
+                  onPressed: save,
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: ConstantsValue.primaryBtnColor,
+                      elevation: 5,
+                      side: const BorderSide()),
+                  child: Text(
+                    "Save Changes",
+                    style: ConstantsValue.primaryInlineText,
+                  )),
+            ),
+          ],
         ));
   }
 }
